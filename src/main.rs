@@ -131,7 +131,7 @@ fn parse_lines(map: HashMap<String, Value>, line_reader_config: LineReaderConfig
         let parsed_line = parser::parse_log_line(string);
 
         if let LogCell::Str(event_type) = parsed_line.1[0] {
-            if event_type == "ENCOUNTER_START" && line_reader_config.parse_trash == false {
+            if (event_type == "ARENA_MATCH_START" || event_type == "ENCOUNTER_START") && line_reader_config.parse_trash == false {
                 parse_enabled = true;
             }
 
@@ -151,7 +151,7 @@ fn parse_lines(map: HashMap<String, Value>, line_reader_config: LineReaderConfig
                 println!("{}", event_json);
             }
 
-            if event_type == "ENCOUNTER_END" && line_reader_config.parse_trash == false {
+            if (event_type == "ARENA_MATCH_END" || event_type == "ENCOUNTER_END") && line_reader_config.parse_trash == false {
                 parse_enabled = false;
             }
         }
